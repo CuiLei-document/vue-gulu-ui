@@ -33,16 +33,15 @@
 <body>
 <div id="app">
     <g-button :loading="loading1" @click="loading1 = !loading1">
-        设置
+        按钮
     </g-button>
     <g-button icon="settings" >
         设置
     </g-button>
 
-    <g-button icon="left" class-prefix="right" @click="loading2 = !loading2" :loading="loading2">
-        设置
+    <g-button   @click="loading2 = !loading2" :loading="true">
+        按钮
     </g-button>
-    <g-button icon="right" class-prefix="right">你好</g-button>
     <g-button-group>
         <g-button icon="left">上一页</g-button>
         <g-button>更多</g-button>

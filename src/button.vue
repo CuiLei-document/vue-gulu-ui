@@ -62,7 +62,7 @@
         & > .icon{
             order: 1;
             margin-top: 1px;
-            margin-right: .1em;
+            margin-right: .2em;
         }
         & > .content{
             order: 2;
