@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/CuiLei-document/vue-gulu-ui/issues"
   },
-  "homepage": "https://github.com/CuiLei-document/vue-gulu-ui#readme"
+  "homepage": "https://github.com/CuiLei-document/vue-gulu-ui#readme",
+  "dependencies": {
+    "vue": "^2.6.12"
+  }
 }
