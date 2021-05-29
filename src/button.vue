@@ -1,0 +1,31 @@
+<template>
+    <div>
+        <button class="g-button ">按钮</button>
+    </div>
+</template>
+<script>
+ export default{
+
+ }
+</script>
+
+<style lang="scss">
+    .g-button{
+        font-size: var(--font-size);
+        height: var(--button-height);
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border-color);
+        padding: 0 1em;
+        background: var(--button-bg);
+        &:hover{
+            border-color: var(--border-color);
+        }
+        &:active{
+            background-color: var(--button-active-bg);
+        }
+        &:focus{
+            outline: none;
+        }
+    }
+
+</style>
