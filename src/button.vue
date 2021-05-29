@@ -1,6 +1,7 @@
 <template>
-        <button  class="g-button " :class="{[`icon-${classPrefix}`]:classPrefix}" >
-            <g-icon v-if="icon" class="icon" :name="icon"></g-icon>
+        <button @click="$emit('click')" class="g-button " :class="{[`icon-${classPrefix}`]:classPrefix}" >
+            <g-icon v-if="icon && !loading" class="icon" :name="icon"></g-icon>
+            <g-icon v-if="loading" class="loading" name="loading"></g-icon>
             <div class="content">
                 <slot />
             </div>
@@ -12,6 +13,10 @@
      props:{
          icon:{
              type:String
+         },
+         loading:{
+             type:Boolean,
+             default:false
          },
          classPrefix:{
              type:String,
@@ -26,6 +31,14 @@
 </script>
 
 <style lang="scss">
+    @keyframes spit{
+        0%{
+            transform: rotate(0deg);
+        }
+        100%{
+            transform: rotate(360deg);
+        }
+    }
     .g-button{
         font-size: var(--font-size);
         height: var(--button-height);
@@ -53,6 +66,9 @@
         }
         & > .content{
             order: 2;
+        }
+        & > .loading{
+            animation: spit 1s infinite linear;
         }
         &.icon-right{
             > .icon{
