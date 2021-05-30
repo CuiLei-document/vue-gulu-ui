@@ -1,5 +1,6 @@
 
-export {default as Button} from './src/button'
-export {default as ButtonGroup} from './src/button-group'
-export {default as Icon} from './src/icon'
+import  Button from './src/button'
+import  ButtonGroup from './src/button-group'
+import  Icon from './src/icon'
 
+export {Button,ButtonGroup,Icon}
