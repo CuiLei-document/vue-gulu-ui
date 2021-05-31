@@ -42,13 +42,14 @@
 </head>
 <body>
 <div id="app">
+<!--    <div class="box">-->
+<!--        <g-input value="张三"></g-input>-->
+<!--        <g-input value="李四" disabled></g-input>-->
+<!--        <g-input value="王五" readonly></g-input>-->
+<!--    </div>-->
     <div class="box">
-        <g-input value="张三"></g-input>
-        <g-input value="李四" disabled></g-input>
-        <g-input value="王五" readonly></g-input>
-    </div>
-    <div class="box">
-        <g-input value="马汉" error="不能少于两个字"></g-input>
+        <g-input  error="不能少于两个字" v-model="message"></g-input>
+        {{message}}
     </div>
     <div class="box">
         <g-button :loading="loading1" @click="loading1 = !loading1">
