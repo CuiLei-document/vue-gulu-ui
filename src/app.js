@@ -3,10 +3,12 @@ import Vue from 'vue';
 import Button from './button.vue';
 import Icon from './icon.vue';
 import ButtonGroup from './button-group.vue';
+import Input from "./Input.vue";
 
 Vue.component('g-button-group', ButtonGroup)
 Vue.component('g-icon', Icon)
 Vue.component('g-button', Button);
+Vue.component('g-input',Input)
 new Vue({
     el: '#app',
     data() {
@@ -32,7 +34,6 @@ const expect = chai.expect;
     })
     vm.$mount()
     let useSettings = vm.$el.querySelector('use')
-    console.log(useSettings);
     expect(useSettings.getAttribute('xlink:href')).to.eq('#i-settings');
 }
 {
@@ -46,7 +47,6 @@ const expect = chai.expect;
     })
     vm.$mount()
     let useElement = vm.$el.querySelector('use')
-    console.log(useElement);
     expect(useElement.getAttribute('xlink:href')).to.eq('#i-loading')
 }
 {

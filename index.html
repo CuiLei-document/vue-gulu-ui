@@ -7,10 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>轱辘</title>
     <style>
-        *{margin:0;padding:0;box-sizing: border-box}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
     </style>
     <style>
-        :root{
+        :root {
             --font-size: 14px;
             --button-height: 32px;
             --button-bg: white;
@@ -20,34 +24,50 @@
             --border-color: #999;
             --border-color--hover: #666;
         }
-        #app{
+
+        #app {
             margin: 10px;
         }
-        body{
+
+        body {
             font-size: var(--font-size);
         }
     </style>
-
+    <style>
+        .box{
+            margin:20px;
+        }
+    </style>
 
 </head>
 <body>
 <div id="app">
-    <g-button :loading="loading1" @click="loading1 = !loading1">
-        按钮
-    </g-button>
-    <g-button icon="settings" >
-        设置
-    </g-button>
+    <div class="box">
+        <g-input value="张三"></g-input>
+        <g-input value="李四" disabled></g-input>
+        <g-input value="王五" readonly></g-input>
+    </div>
+    <div class="box">
+        <g-input value="马汉" error="不能少于两个字"></g-input>
+    </div>
+    <div class="box">
+        <g-button :loading="loading1" @click="loading1 = !loading1">
+            按钮
+        </g-button>
+        <g-button icon="settings">
+            设置
+        </g-button>
 
-    <g-button   @click="loading2 = !loading2" :loading="true">
-        按钮
-    </g-button>
-    <g-button-group>
-        <g-button icon="left">上一页</g-button>
-        <g-button>更多</g-button>
-        <g-button icon="right" class-prefix="right">下一页</g-button>
-    </g-button-group>
-    <div id="test"></div>
+        <g-button @click="loading2 = !loading2" :loading="true">
+            按钮
+        </g-button>
+        <g-button-group>
+            <g-button icon="left">上一页</g-button>
+            <g-button>更多</g-button>
+            <g-button icon="right" class-prefix="right">下一页</g-button>
+        </g-button-group>
+    </div>
+
 </div>
 <script src="./src/app.js"></script>
 </body>
