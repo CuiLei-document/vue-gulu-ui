@@ -37,11 +37,71 @@
         .box{
             margin:20px;
         }
+        .demoBox{
+            height: 50px;
+            /*background: red;*/
+            border: 1px solid red;
+        }
     </style>
 
 </head>
 <body>
+
 <div id="app">
+    <g-row class="topbar">
+        <g-col class="demoBox" span="9" >
+            <g-row align="left">
+                <g-col >1</g-col>
+                <g-col>2</g-col>
+                <g-col>3</g-col>
+                <g-col>4</g-col>
+            </g-row>
+        </g-col>
+        <g-col span="15" class="demoBox">
+            <g-row align="right">
+                <g-col>1</g-col>
+                <g-col>2</g-col>
+                <g-col>3</g-col>
+                <g-col>4</g-col>
+                <g-col>5</g-col>
+                <g-col>6</g-col>
+                <g-col>7</g-col>
+            </g-row>
+        </g-col>
+    </g-row >
+<!--    <div style="border: 1px solid red">-->
+        <g-row  class="demoBox">
+            <g-col  span="12" offset="2">1</g-col>
+            <g-col  span="10">2</g-col>
+        </g-row>
+<!--        <g-row gutter="20">-->
+<!--            <g-col>1</g-col>-->
+<!--            <g-col>2</g-col>-->
+<!--            <g-col>3</g-col>-->
+<!--        </g-row>-->
+<!--        <g-row gutter="20">-->
+<!--            <g-col>1</g-col>-->
+<!--            <g-col>2</g-col>-->
+<!--            <g-col>3</g-col>-->
+<!--            <g-col>4</g-col>-->
+<!--        </g-row>-->
+<!--        <g-row gutter="20">-->
+<!--            <g-col :span="2">2</g-col>-->
+<!--            <g-col :span="22">22</g-col>-->
+<!--        </g-row>-->
+<!--        <g-row gutter="20">-->
+<!--            <g-col :span="2" offset="2">2</g-col>-->
+<!--            <g-col :span="18" offset="2">22</g-col>-->
+<!--        </g-row>-->
+<!--        <g-row gutter="20">-->
+<!--            <g-col  span="3" offset="2">2</g-col>-->
+<!--            <g-col :span="17" offset="2">22</g-col>-->
+<!--        </g-row>-->
+<!--        <g-row gutter="20">-->
+<!--            <g-col span="8" offset="2">2</g-col>-->
+<!--            <g-col span="12" offset="2">2</g-col>-->
+<!--        </g-row>-->
+<!--    </div>-->
     <div class="box">
         <g-input value="张三"></g-input>
         <g-input value="李四" disabled></g-input>
