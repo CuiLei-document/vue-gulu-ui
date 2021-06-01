@@ -41,7 +41,7 @@ describe('Input', () => {
                 }
             }).$mount()
             const inputElement = vm.$el.querySelector('input')
-            console.log(inputElement.outerHTML);
+
             expect(inputElement.readOnly).to.equal(true)
         })
 
