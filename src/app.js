@@ -11,7 +11,9 @@ import Content from './Content.vue';
 import Footer from './Footer.vue';
 import Header from './Header.vue';
 import Sider from './Sider.vue';
-
+import Toast from './Toast.vue'
+import plugin from "./plugin";
+Vue.component('g-toast', Toast)
 Vue.component('g-layout', Layout)
 Vue.component('g-content', Content)
 Vue.component('g-footer', Footer)
@@ -23,6 +25,7 @@ Vue.component('g-button-group', ButtonGroup)
 Vue.component('g-icon', Icon)
 Vue.component('g-button', Button);
 Vue.component('g-input', Input)
+Vue.use(plugin)
 new Vue({
     el: '#app',
     data() {
@@ -33,17 +36,14 @@ new Vue({
             message: 'hi'
         }
     },
+
     created() {
-        // setTimeout(() => {
-        //     let event = new Event('change')
-        //     let inputElement = this.$el.querySelector('input')
-        //     inputElement.dispatchEvent(event)
-        // }, 3000)
+
     },
     methods: {
-        updateInput(e) {
-            console.log(e);
-        }
+       showToast(){
+           this.$toast('我是 toast')
+       }
     }
 })
 
