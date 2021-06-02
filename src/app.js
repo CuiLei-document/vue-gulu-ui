@@ -13,6 +13,7 @@ import Header from './Header.vue';
 import Sider from './Sider.vue';
 import Toast from './Toast.vue'
 import plugin from "./plugin";
+
 Vue.component('g-toast', Toast)
 Vue.component('g-layout', Layout)
 Vue.component('g-content', Content)
@@ -41,20 +42,29 @@ new Vue({
 
     },
     methods: {
-       showToast(){
-           this.$toast(`你的智商该充值了`,{
-               classPrefix:'middle',
-                enableHtml:false,
-               closeButton:{
-                    text:'充值',
-                   callback(){
+        showToast1() {
+            this.showToast('top')
+        },
+        showToast2() {
+            this.showToast('middle')
+        },
+        showToast3() {
+            this.showToast('bottom')
+        },
+        showToast(position) {
+            this.$toast(`你的智商为${parseInt(Math.random() * 100)}。你的智商该充值了`, {
+                classPrefix: position,
+                enableHtml: false,
+                closeButton: {
+                    text: '充值',
+                    callback() {
                         console.log('充值已经到位')
-                   }
-               },
-               autoClose:true,
+                    }
+                },
+                autoClose: true,
 
-           })
-       }
+            })
+        }
     }
 })
 
