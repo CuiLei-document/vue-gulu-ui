@@ -1,6 +1,6 @@
 <template>
     <transition name="fade">
-        <div class="toast" v-if="autoClose" ref="toast">
+        <div class="toast" v-if="autoClose" ref="toast" :class="{[`toast-${classPrefix}`]:classPrefix}">
             <div class="wrapper">
                 <slot v-if="!enableHtml"></slot>
                 <div v-else v-html="$slots.default[0]"></div>
@@ -36,6 +36,12 @@
             enableHtml:{
                 type:Boolean,
                 default:false
+            },
+            classPrefix:{
+                type:String,
+                validator(value){
+                    return ['left','bottom','middle'].indexOf(value)>=0
+                }
             }
         },
         mounted(){
@@ -82,7 +88,6 @@
     .toast {
         font-size: $font-size;
         position: fixed;
-        top:0;
         left: 50%;
         transform: translateX(-50%);
         min-height:$toast-min-height;
@@ -111,6 +116,18 @@
         }
         .fade-enter,.fade-leave-to{
             opacity: 0;
+        }
+        &-top{
+            top:0;
+            transform: translateX(-50%);
+        }
+        &-bottom{
+            bottom:0;
+            transform: translateX(-50%);
+        }
+        &-middle{
+            top:50%;
+            transform: translateX(-50%,-50%);
         }
     }
 

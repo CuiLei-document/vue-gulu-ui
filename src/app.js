@@ -42,8 +42,17 @@ new Vue({
     },
     methods: {
        showToast(){
-           this.$toast(`<p><storng>加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的</storng><a href="https://qq.com"</a></p>`,{
-                enableHtml:false
+           this.$toast(`你的智商该充值了`,{
+               classPrefix:'middle',
+                enableHtml:false,
+               closeButton:{
+                    text:'充值',
+                   callback(){
+                        console.log('充值已经到位')
+                   }
+               },
+               autoClose:true,
+
            })
        }
     }
