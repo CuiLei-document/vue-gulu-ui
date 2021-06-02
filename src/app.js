@@ -42,7 +42,9 @@ new Vue({
     },
     methods: {
        showToast(){
-           this.$toast('我是 toast')
+           this.$toast(`<p><storng>加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的加粗的</storng><a href="https://qq.com"</a></p>`,{
+                enableHtml:false
+           })
        }
     }
 })

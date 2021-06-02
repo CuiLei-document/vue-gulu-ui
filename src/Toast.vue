@@ -1,10 +1,14 @@
 <template>
     <transition name="fade">
-        <div class="toast" v-if="autoClose">
-            <slot></slot>
-            <span class="line"></span>
+        <div class="toast" v-if="autoClose" ref="toast">
+            <div class="wrapper">
+                <slot v-if="!enableHtml"></slot>
+                <div v-else v-html="$slots.default[0]"></div>
+            </div>
+            <span class="line" ref="line"></span>
             <span class="close" v-if="closeButton" @click="onCloseButton">
                 {{closeButton.text}}
+
             </span>
         </div>
     </transition>
@@ -25,28 +29,46 @@
                 default:()=>{
                     return {
                         text:'关闭',
-                        callback:function(toast){
-                            toast.close()
-                        }
+                        callback:undefined
                     }
                 }
+            },
+            enableHtml:{
+                type:Boolean,
+                default:false
             }
         },
         mounted(){
-            if(this.autoClose){
-                setTimeout(()=>{
-                    this.close()
-                },this.autoCloseDey * 1000)
-            }
+            this.updateStyle()
+            this.autoLineStyle()
         },
         methods:{
+            autoLineStyle(){
+                this.$nextTick(()=>{
+                    let {height} = this.$refs.toast.getBoundingClientRect()
+                    this.$refs.line.style.height = height + 'px'
+                })
+            },
+            updateStyle(){
+                if(this.autoClose){
+                    setTimeout(()=>{
+                        this.close()
+                    },this.autoCloseDey * 1000)
+                }
+            },
+
             close(){
                 this.$el.remove()
                 this.$destroy()
             },
+            log(){
+                console.log('测试')
+            },
             onCloseButton(){
                 this.close()
-                this.closeButton.callback()
+                if(this.closeButton && typeof this.closeButton.callback === 'function'){
+                    this.closeButton.callback(this)
+                }
             }
         }
     }
@@ -54,7 +76,7 @@
 <style lang="scss" scoped>
     $font-size: 14px;
     $border-radius: 4px;
-    $toast-height: 40px;
+    $toast-min-height: 40px;
     $box-shadow: 0 0 3px 0px rgba(0,0,0,0.5);
     $toast-bg: rgba(0,0,0,0.75);
     .toast {
@@ -63,7 +85,7 @@
         top:0;
         left: 50%;
         transform: translateX(-50%);
-        height:$toast-height;
+        min-height:$toast-min-height;
         padding: 0 16px;
         line-height:1.8;
         display: flex;
@@ -77,15 +99,20 @@
             border-left: 1px solid red;
             margin-left: 16px;
         }
+        > .wrapper{
+            padding: 6px 0;
+        }
+        .close{
+            margin-left: 16px;
+            flex-shrink:0;
+        }
+        .fade-enter-active,.fade-leave-active{
+            transition: all 3s;
+        }
+        .fade-enter,.fade-leave-to{
+            opacity: 0;
+        }
     }
 
-    .close{
-        margin-left: 16px;
-    }
-    .fade-enter-active,.fade-leave-active{
-        transition: all 3s;
-    }
-    .fade-enter,.fade-leave-to{
-        opacity: 0;
-    }
+
 </style>
