@@ -50,9 +50,12 @@ new Vue({
         showToast3() {
             this.showToast('bottom')
         },
-        showToast() {
-            this.$toast('我是你的哥')
-
+        showToast(position) {
+            this.$toast(`小兄弟你的网费欠${parseInt(Math.random()*100)}`,
+                {
+                    position:position,
+                    enableHtml: true
+                })
         }
     }
 })
