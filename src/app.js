@@ -39,7 +39,6 @@ new Vue({
     },
 
     created() {
-
     },
     methods: {
         showToast1() {
@@ -51,19 +50,9 @@ new Vue({
         showToast3() {
             this.showToast('bottom')
         },
-        showToast(position) {
-            this.$toast(`你的智商为${parseInt(Math.random() * 100)}。你的智商该充值了`, {
-                classPrefix: position,
-                enableHtml: false,
-                closeButton: {
-                    text: '充值',
-                    callback() {
-                        console.log('充值已经到位')
-                    }
-                },
-                autoClose: true,
+        showToast() {
+            this.$toast('我是你的哥')
 
-            })
         }
     }
 })

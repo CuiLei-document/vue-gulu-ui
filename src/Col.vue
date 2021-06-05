@@ -25,18 +25,22 @@
             offset: {
                 type: [Number, String]
             },
-            phone: {
+
+            ipad: {
                 type: Object,
-                validator(value){
-                    let keys = Object.keys(value)
-                    let volid = true
-                    keys.forEach((key)=>{
-                        if(!['span','offset'].includes(key)){
-                            volid = false
-                        }
-                    })
-                    return volid
-                }
+                validator
+            },
+            narrowPc: {
+                type: Object,
+                validator
+            },
+            pc: {
+                type: Object,
+                validator
+            },
+            widePc: {
+                type: Object,
+                validator
             }
         },
         data() {
@@ -46,17 +50,27 @@
         },
         computed: {
             colClass() {
-                let {span, offset, phone} = this
-                console.log(phone);
-                let phoneClass = []
-                if(phone){
-                    phoneClass = [`col-phone-${phone.span}`]
+                let {span, offset,  ipad, narrowPc, pc, widePc} = this
+                let createClasses = (obj,str='') =>{
+                    if(!obj){
+                        return []
+                    }
+                    let array = []
+                    if(obj.span){
+                        array.push(`col-${str}${obj.span}`)
+                    }
+                    if(obj.offset){
+                        array.push(`offset-${str}${obj.offset}`)
+                    }
+                    return array
                 }
-                return {
-                    ...(phoneClass),
-                    [`col-${span}`]: span,
-                    [`offset-${offset}`]: offset,
-                }
+                return [
+                    ...createClasses({span,offset}),
+                    ...createClasses(ipad,'ipad-'),
+                    ...createClasses(narrowPc,'narrow-pc-'),
+                    ...createClasses(pc,'pc-'),
+                    ...createClasses(widePc,'wide-pc-'),
+                ]
             },
             colStyle() {
                 let {gutter} = this
@@ -70,36 +84,74 @@
 </script>
 <style lang="scss" scoped>
     .col {
-        border: 1px solid red;
-        /*width: 50%;*/
-        height: 100px;
-        padding: 0 10px;
-        /*background: grey;*/
-        $class-prefix: col-phone-;
+        $class-prefix: col-;
         @for $n from 1 through 24 {
             &.#{$class-prefix}#{$n} {
                 width: ($n / 24) * 100%;
             }
         }
 
-        $class-prefix: offset-phone-;
+        $class-prefix: offset-;
         @for $n from 1 through 24 {
             &.#{$class-prefix}#{$n} {
                 margin-left: ($n / 24) * 100%;
             }
         }
-        @media (max-height: 576px) {
-            $class-prefix: col-;
+
+        @media (min-width: 577px)  {
+            $class-prefix: col-ipad-;
             @for $n from 1 through 24 {
                 &.#{$class-prefix}#{$n} {
                     width: ($n / 24) * 100%;
                 }
             }
 
-            $class-prefix: offset-;
+            $class-prefix: offset-ipad-;
             @for $n from 1 through 24 {
                 &.#{$class-prefix}#{$n} {
                     margin-left: ($n / 24) * 100%;
+                }
+            }
+        }
+        @media (min-width:769px)  {
+            $class-prefix: col-narrow-pc-;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n}{
+                    width: ($n / 24) * 100%
+                }
+            }
+            $class-prefix: offset-narrow-pc-;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n}{
+                    width: ($n / 24) * 100%
+                }
+            }
+        }
+        @media (min-width:993px)  {
+            $class-prefix: col-pc-;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n}{
+                    width: ($n / 24) * 100%
+                }
+            }
+            $class-prefix: offset-pc-;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n}{
+                    width: ($n / 2) * 100%
+                }
+            }
+        }
+        @media (min-width: 1201px) {
+            $class-prefix: col-wide-pc-;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n}{
+                    width: ($n / 24) *100%
+                }
+            }
+            $class-prefix: offset-wide-pc-;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n}{
+                    width: ($n / 24) *100%
                 }
             }
         }

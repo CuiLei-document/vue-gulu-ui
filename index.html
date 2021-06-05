@@ -31,18 +31,38 @@
         }
     </style>
     <style>
-        .demoBox{
+        .demoBox {
             border: 1px solid red;
+            height: 100px;
+            background: #ddd;
         }
-
+        .layout{
+            border: 1px solid red;
+            height: 100vh;
+        }
+        .header{
+            background: #333333;
+            min-height: 100px;
+        }
+        .content{
+            min-height: 100px;
+            background: rosybrown;
+        }
+        .footer{
+            min-height: 100px;
+            background: #bbbbbb;
+        }
+        .sider{
+            min-height: 100px;
+            width:  200px;
+            background: #F1435D;
+        }
     </style>
 </head>
 <body>
 
 <div id="app">
-    <g-row>
-        <g-col span="5" :phone="{span:12}">1</g-col>
-    </g-row>
+  <button @click="showToast">按钮</button>
 </div>
 <script src="./src/app.js"></script>
 </body>

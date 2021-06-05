@@ -6,20 +6,22 @@
 <script>
     export default{
         name:'GuluLayout',
-        data(){
-          return{
-              layoutClass:{
-                  hasSider:false
-              }
-          }
-        },
+       data(){
+            return {
+                layoutClass:{
+                    hasSider: false
+                }
+            }
+       },
         mounted(){
-          this.$children.forEach(vm=>{
-              if(vm.$options.name === 'GuluSider'){
-                  this.layoutClass.hasSider = true
-              }
-          })
+            console.log(this.$children);
+            this.$children.forEach((vm)=>{
+                if(vm.$options.name === 'GuluSider'){
+                    this.layoutClass.hasSider = true;
+                }
+            })
         }
+
     }
 </script>
 <style lang="scss" scoped>

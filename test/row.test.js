@@ -18,27 +18,25 @@ describe('Row', () => {
         document.body.appendChild(div)
         div.innerHTML = `
             <g-row gutter="20">
-                <g-col span="12" ></g-col>
-                <g-col span="12" ></g-col>
-            </g-row>>
-        `
+                <g-col span="12"></g-col>
+                <g-col span="12"></g-col>
+            </g-row>
+       `
         const vm = new Vue({
-            el: div
+            el: 'div'
         })
-        setTimeout(()=>{
+        setTimeout(() => {
             const row = vm.$el.querySelector('.row')
-            console.log(getComputedStyle(row).marginLeft);
-            expect(getComputedStyle(row).marginLeft).to.eq('-10px')
-            const clos = vm.$el.querySelectorAll('.col');
-            console.log(getComputedStyle(clos))
-            expect(getComputedStyle(clos[0]).paddingRight).to.eq('10px')
+            expect(getComputedStyle(row).marginRight).to.eq('-10px')
+            const cols = vm.$el.querySelectorAll('.col')
+            expect(getComputedStyle(cols[0]).paddingLeft).to.equal('10px')
+            expect(getComputedStyle(cols[1]).paddingRight).to.equal('10px')
             done()
+            vm.$el.remove()
+            vm.$destroy()
         })
-        vm.$el.remove()
-        vm.$destroy()
-
     })
-    it('接收 align 属性',()=>{
+    it('接收 align 属性', () => {
         const div = document.createElement('div')
         document.body.appendChild(div)
         const Constructor = Vue.extend(Row)
