@@ -24,7 +24,7 @@
                 default: true
             },
             autoCloseDey: {
-                default: 50
+                default: 5
             },
             closeButton: {
                 type: Object,
