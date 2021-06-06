@@ -14,7 +14,6 @@
             }
        },
         mounted(){
-            console.log(this.$children);
             this.$children.forEach((vm)=>{
                 if(vm.$options.name === 'GuluSider'){
                     this.layoutClass.hasSider = true;

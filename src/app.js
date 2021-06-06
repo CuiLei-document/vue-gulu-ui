@@ -13,7 +13,17 @@ import Header from './Header.vue';
 import Sider from './Sider.vue';
 import Toast from './Toast.vue'
 import plugin from "./plugin";
+import Tabs from './Tabs.vue'
+import TabsHead from './TabsHead.vue';
+import TabsBody from './TabsBody.vue';
+import TabsItem from './TabsItem.vue';
+import TabsPane from './TabsPane.vue';
 
+Vue.component('g-tabs',Tabs)
+Vue.component('g-tabs-head',TabsHead)
+Vue.component('g-tabs-body',TabsBody)
+Vue.component('g-tabs-item',TabsItem)
+Vue.component('g-tabs-pane',TabsPane)
 Vue.component('g-toast', Toast)
 Vue.component('g-layout', Layout)
 Vue.component('g-content', Content)
@@ -34,7 +44,8 @@ new Vue({
             loading1: false,
             loading2: false,
             loading3: false,
-            message: 'hi'
+            message: 'hi',
+            selectedTab:'sports'
         }
     },
 
