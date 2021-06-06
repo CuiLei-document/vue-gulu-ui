@@ -51,11 +51,13 @@ new Vue({
             this.showToast('bottom')
         },
         showToast(position) {
-            this.$toast(`小兄弟你的网费欠${parseInt(Math.random()*100)}`,
+            this.$toast(`小兄弟你的网费欠${parseInt(Math.random() * 100)}`,
                 {
-                    position:position,
-                    enableHtml: true
-                })
+                    position: position,
+                    enableHtml: true,
+                    autoClose: 5
+                },
+            )
         }
     }
 })
