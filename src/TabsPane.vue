@@ -31,9 +31,14 @@
     }
 </script>
 <style lang="scss" scoped>
+    @keyframes fade-pane {
+        0%{opacity:0;transform:translateX(-100%)}
+        100%{opacity:1;transform:translateX(0)}
+    }
     .tabs-pane{
+        padding: 16px;
         &.active{
-            background: red;
+            animation: fade-pane 250ms;
         }
     }
 </style>
