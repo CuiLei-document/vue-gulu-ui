@@ -1,36 +1,39 @@
 <template>
     <div class="popover" @click.stop="xxx">
-        <div class="content-wrapper" v-if="visible" @click.stop>
+        <div ref="contentWrapper" class="content-wrapper" v-if="visible" @click.stop>
             <slot name="content"></slot>
         </div>
+        <span ref="triggerWrapper">
         <slot></slot>
+        </span>
     </div>
 </template>
 
 <script>
     export default {
         name: 'GuluPopover',
-        data(){
-            return{
-                visible:false
+        data() {
+            return {
+                visible: false
             }
         },
-        methods:{
-            xxx(){
+        methods: {
+            xxx: function () {
                 this.visible = !this.visible
-                console.log('切换visible')
-                console.log(this.visible);
-                if( this.visible === true){
-                    setTimeout(()=>{
-                        console.log('新增一个document监听器')
-                        let eventHandler = ()=>{
-                            console.log('点击body关闭document监听器');
+                if (this.visible === true) {
+                    this.$nextTick(() => {
+                        let {contentWrapper} = this.$refs;
+                        document.body.appendChild(contentWrapper)
+                        let {width, height, top, left} = this.$refs.triggerWrapper.getBoundingClientRect()
+                        console.log(width, height, top, left);
+                        contentWrapper.style.left = left+ window.scrollX + 'px'
+                        contentWrapper.style.top = top + window.scrollY + 'px'
+                        let eventHandler = () => {
                             this.visible = false
-                            console.log('删除监听器');
-                            document.removeEventListener('click',eventHandler)
+                            document.removeEventListener('click', eventHandler)
                         }
                         document.addEventListener('click', eventHandler)
-                    },1000)
+                    }, 1000)
                 }
             }
         }
@@ -38,18 +41,17 @@
 </script>
 
 <style scoped lang="scss">
-    .popover{
+    .popover {
         display: inline-block;
         vertical-align: top;
         position: relative;
-        > .content-wrapper{
-            position: absolute;
-            left:0;
-            bottom:100%;
-            border: 1px solid red;
-            box-shadow: 0 0 3px rgba(0,0,0,0.5);
-            > .content{
-            }
+    }
+    .content-wrapper {
+        position: absolute;
+        border: 1px solid red;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+        transform: translateY(-100%);
+        > .content {
         }
     }
 </style>
