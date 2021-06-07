@@ -16,7 +16,7 @@
     import Icon from './Icon'
     export default {
         components:{Icon},
-        name: 'input',
+        name: 'GuluInput',
         props: {
             value: String,
             disabled: {

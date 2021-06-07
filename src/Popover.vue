@@ -18,6 +18,20 @@
         methods:{
             xxx(){
                 this.visible = !this.visible
+                console.log('切换visible')
+                console.log(this.visible);
+                if( this.visible === true){
+                    setTimeout(()=>{
+                        console.log('新增一个document监听器')
+                        let eventHandler = ()=>{
+                            console.log('点击body关闭document监听器');
+                            this.visible = false
+                            console.log('删除监听器');
+                            document.removeEventListener('click',eventHandler)
+                        }
+                        document.addEventListener('click', eventHandler)
+                    },1000)
+                }
             }
         }
     }

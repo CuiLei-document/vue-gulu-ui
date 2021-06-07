@@ -3,7 +3,7 @@ import Vue from 'vue';
 import Button from './button.vue';
 import Icon from './icon.vue';
 import ButtonGroup from './button-group.vue';
-import Input from "./Input.vue";
+import FromInput from "./FromInput.vue";
 import Row from './Row.vue'
 import Col from './Col.vue'
 import Layout from './layout.vue';
@@ -37,7 +37,7 @@ Vue.component('g-col', Col)
 Vue.component('g-button-group', ButtonGroup)
 Vue.component('g-icon', Icon)
 Vue.component('g-button', Button);
-Vue.component('g-input', Input)
+Vue.component('g-from-input', FromInput)
 Vue.use(plugin)
 new Vue({
     el: '#app',
