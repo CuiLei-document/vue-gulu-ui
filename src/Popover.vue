@@ -1,10 +1,10 @@
 <template>
-    <div class="popover" @click="onClick">
+    <div class="popover" @click="onClick" ref="popover">
         <div ref="contentWrapper" class="content-wrapper" v-if="visible">
             <slot name="content"></slot>
         </div>
         <span ref="triggerWrapper">
-        <slot></slot>
+             <slot></slot>
         </span>
     </div>
 </template>
@@ -18,45 +18,42 @@
             }
         },
         methods: {
-            positionContent() {
-                let {contentWrapper} = this.$refs;
-                document.body.appendChild(contentWrapper)
-                let {width, height, top, left} = this.$refs.triggerWrapper.getBoundingClientRect()
-                contentWrapper.style.left = left + window.scrollX + 'px'
-                contentWrapper.style.top = top + window.scrollY + 'px'
+            positionContent(){
+                document.body.appendChild(this.$refs.contentWrapper)
+                let {left, top} = this.$refs.triggerWrapper.getBoundingClientRect()
+                this.$refs.contentWrapper.style.left = left + 'px'
+                this.$refs.contentWrapper.style.top = top + 'px'
             },
-            closeElement() {
-                // if (this.$refs.triggerWrapper.contains(event.target)) {
-                //     this.visible = !this.visible
-                //     if (this.visible !== true) {
-                //         return;
-                //     }
-                //     this.$nextTick(() => {
-                //         this.positionContent()
-                //         let eventHandler = (e) => {
-                //             if (this.$refs.contentWrapper && this.$refs.contentWrapper.contains(e.target)) {
-                //                 return
-                //             } else {
-                //                 this.visible = false
-                //                 document.removeEventListener('click', eventHandler)
-                //             }
-                //         }
-                //         document.addEventListener('click', eventHandler)
-                //     })
-                // }
+            onClickDocument (e) {
+                if (this.$refs.contentWrapper) {
+                    if (this.$refs.contentWrapper.contains(e.target)) {
+                        return
+                    } else {
+                        this.onClose()
+                    }
+                } else {
+                    this.onClose()
+                }
+            },
+            open(){
+                this.visible = true
+                setTimeout(() => {
+                    this.positionContent()
+                    document.addEventListener('click', this.onClickDocument)
+                })
+            },
+            onClose(){
+                this.visible = false
+                document.removeEventListener('click', this.onClickDocument)
 
             },
             onClick(event) {
                 if (this.$refs.triggerWrapper.contains(event.target)) {
-                    this.visible = !this.visible
                     console.log('切换visible')
-                    if ( this.visible === true ) {
-                        setTimeout(() => {
-                            document.addEventListener('click', () => {
-                                this.visible = false
-                                console.log('点击body 关闭 visible')
-                            })
-                        })
+                    if (this.visible === true) {
+                       this.onClose()
+                    }else{
+                        this.open()
                     }
                 }
             }
