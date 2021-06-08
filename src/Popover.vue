@@ -1,6 +1,6 @@
 <template>
-    <div class="popover" @click.stop="xxx">
-        <div ref="contentWrapper" class="content-wrapper" v-if="visible" @click.stop>
+    <div class="popover" @click="onClick">
+        <div ref="contentWrapper" class="content-wrapper" v-if="visible">
             <slot name="content"></slot>
         </div>
         <span ref="triggerWrapper">
@@ -18,22 +18,46 @@
             }
         },
         methods: {
-            xxx: function () {
-                this.visible = !this.visible
-                if (this.visible === true) {
-                    this.$nextTick(() => {
-                        let {contentWrapper} = this.$refs;
-                        document.body.appendChild(contentWrapper)
-                        let {width, height, top, left} = this.$refs.triggerWrapper.getBoundingClientRect()
-                        console.log(width, height, top, left);
-                        contentWrapper.style.left = left+ window.scrollX + 'px'
-                        contentWrapper.style.top = top + window.scrollY + 'px'
-                        let eventHandler = () => {
-                            this.visible = false
-                            document.removeEventListener('click', eventHandler)
-                        }
-                        document.addEventListener('click', eventHandler)
-                    }, 1000)
+            positionContent() {
+                let {contentWrapper} = this.$refs;
+                document.body.appendChild(contentWrapper)
+                let {width, height, top, left} = this.$refs.triggerWrapper.getBoundingClientRect()
+                contentWrapper.style.left = left + window.scrollX + 'px'
+                contentWrapper.style.top = top + window.scrollY + 'px'
+            },
+            closeElement() {
+                // if (this.$refs.triggerWrapper.contains(event.target)) {
+                //     this.visible = !this.visible
+                //     if (this.visible !== true) {
+                //         return;
+                //     }
+                //     this.$nextTick(() => {
+                //         this.positionContent()
+                //         let eventHandler = (e) => {
+                //             if (this.$refs.contentWrapper && this.$refs.contentWrapper.contains(e.target)) {
+                //                 return
+                //             } else {
+                //                 this.visible = false
+                //                 document.removeEventListener('click', eventHandler)
+                //             }
+                //         }
+                //         document.addEventListener('click', eventHandler)
+                //     })
+                // }
+
+            },
+            onClick(event) {
+                if (this.$refs.triggerWrapper.contains(event.target)) {
+                    this.visible = !this.visible
+                    console.log('切换visible')
+                    if ( this.visible === true ) {
+                        setTimeout(() => {
+                            document.addEventListener('click', () => {
+                                this.visible = false
+                                console.log('点击body 关闭 visible')
+                            })
+                        })
+                    }
                 }
             }
         }
@@ -46,11 +70,13 @@
         vertical-align: top;
         position: relative;
     }
+
     .content-wrapper {
         position: absolute;
         border: 1px solid red;
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
         transform: translateY(-100%);
+
         > .content {
         }
     }
