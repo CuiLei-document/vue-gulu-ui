@@ -28,23 +28,30 @@
         },
         methods: {
             positionContent() {
-                document.body.appendChild(this.$refs.contentWrapper)
-                let {width, height, left, top} = this.$refs.triggerWrapper.getBoundingClientRect()
-                if (this.position === 'top') {
-                    this.$refs.contentWrapper.style.left = left + window.scrollX + 'px'
-                    this.$refs.contentWrapper.style.top = top + window.scrollY + 'px'
-                } else if (this.position === 'bottom') {
-                    this.$refs.contentWrapper.style.left = left + window.scrollX + 'px'
-                    this.$refs.contentWrapper.style.top = top + height + window.scrollY + 'px'
-                } else if (this.position === 'left') {
-                    this.$refs.contentWrapper.style.left = left + window.scrollX + 'px'
-                    let {height: height2} = this.$refs.contentWrapper.getBoundingClientRect()
-                    this.$refs.contentWrapper.style.top = top + window.scrollY + (height - height2) / 2  + 'px'
-                }else if(this.position === 'right'){
-                    this.$refs.contentWrapper.style.left = left + window.scrollX + 'px'
-                    let {height: height2} = this.$refs.contentWrapper.getBoundingClientRect()
-                    this.$refs.contentWrapper.style.top = top + (height - height2) / 2  + window.scrollY + 'px'
+                const {contentWrapper, triggerWrapper} = this.$refs
+                document.body.appendChild(contentWrapper)
+                let {width, height, left, top} = triggerWrapper.getBoundingClientRect()
+                let {height: height2} = contentWrapper.getBoundingClientRect()
+                let x = {
+                    top: {
+                        left: left + window.scrollX,
+                        top: top + window.scrollY
+                    },
+                    bottom: {
+                        left: left + window.scrollX,
+                        top: top + height + window.scrollY
+                    },
+                    left: {
+                        left: left + window.scrollX,
+                        top: top + window.scrollY + (height - height2) / 2
+                    },
+                    right: {
+                        left: left + window.scrollX,
+                        top: top + (height - height2) / 2 + window.scrollY
+                    }
                 }
+                contentWrapper.style.left = x[this.position].left + 'px'
+                contentWrapper.style.top = x[this.position].top + 'px'
             },
             onClickDocument(e) {
                 if (this.$refs.contentWrapper) {
@@ -98,7 +105,7 @@
         border: 1px solid $border-color;
         border-radius: $border-radius;
         padding: 0.5em 1em;
-        fliter: drop-shadow(0 0 3px rgba(0,0,0,0.5));
+        fliter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.5));
         background: white;
         max-width: 20em;
         word-break: break-all;
@@ -149,9 +156,11 @@
                 bottom: calc(100% - 1px);
             }
         }
-        &.position-left{
+
+        &.position-left {
             transform: translateX(-100%);
             margin-left: -10px;
+
             &::before, &::after {
                 left: 100%;
                 top: 50%;
@@ -168,9 +177,11 @@
                 left: calc(100% - 1px);
             }
         }
-        &.position-right{
+
+        &.position-right {
             transform: translateX(100%);
             margin-left: 10px;
+
             &::before, &::after {
                 right: 100%;
                 top: 50%;
