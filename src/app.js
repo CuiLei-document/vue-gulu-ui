@@ -46,12 +46,8 @@ Vue.use(plugin)
 new Vue({
     el: '#app',
     data() {
-        return {
-            loading1: false,
-            loading2: false,
-            loading3: false,
-            message: 'hi',
-            selectedTab:'sports'
+        return {Tab:'sports',
+            selectedTab: ['2','1']
         }
     },
 
