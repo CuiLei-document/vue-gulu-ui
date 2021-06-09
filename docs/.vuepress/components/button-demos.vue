@@ -1,6 +1,8 @@
 <template>
     <div>
-        <g-button>按钮</g-button>
+        <g-button loading>按钮</g-button>
+        <g-button icon="settings">按钮</g-button>
+        <g-button >按钮</g-button>
     </div>
 </template>
 <script>
