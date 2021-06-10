@@ -1,5 +1,5 @@
 module.exports = {
-    base:'vue-gulu2-ui',
+    base:'vue-gulu-ui',
     title: '咕噜UI',
     description: '一个很好用的UI框架',
     themeConfig: {
