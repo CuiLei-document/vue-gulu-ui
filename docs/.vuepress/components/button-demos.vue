@@ -30,13 +30,3 @@
         }
     }
 </script>
-<style lang="scss" scoped>
-    *{
-        margin:0;
-        padding:0;
-    }
-    ::before,::after{
-      box-sizing: border-box;
-    }
-
-</style>
