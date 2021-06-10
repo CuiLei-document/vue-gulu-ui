@@ -1,7 +1,9 @@
 module.exports = {
+    base:'/vue-gulu-ui/',
     title: '咕噜UI',
     description: '一个很好用的UI框架',
     themeConfig: {
+        base:'',
         nav: [
             {text: '百度', link: 'https://baidu.com'},
         ],
