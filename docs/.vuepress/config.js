@@ -1,9 +1,5 @@
 module.exports = {
-<<<<<<< HEAD
     base:'/vue-gulu-ui/',
-=======
-    base:'vue-gulu-ui',
->>>>>>> main
     title: '咕噜UI',
     description: '一个很好用的UI框架',
     themeConfig: {
